@@ -34,4 +34,28 @@ public class Room {
     public boolean isAvailable() {
         return isAvailable;
     }
+
+    public void checkIn() {
+        this.isAvailable = false;
+        this.isOccupied = true;
+        this.isClean = false;
+
+        System.out.println("Room is currently occupied.");
+    }
+
+    public void checkOut(Room r) {
+        this.isOccupied = false;
+        this.isAvailable = false;
+
+        //Room needs to be cleaned before being made available
+        cleanRoom(r);
+    }
+
+    public void cleanRoom(Room r) {
+        if (!r.isClean) {
+            this.isClean = true;
+            this.isAvailable = true;
+            System.out.println("Room is available!");
+        }
+    }
 }
