@@ -60,8 +60,8 @@ public class DealershipFileManager {
                 vehicles.add(v);
             }
 
+            //Returning back Dealership object
             return d;
-
 
         } catch (IOException e) {
             throw new RuntimeException(e);

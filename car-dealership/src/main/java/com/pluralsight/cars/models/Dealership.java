@@ -14,10 +14,31 @@ public class Dealership {
         this.phone = phone;
     }
 
+    public static void getVehiclesByPrice (double min, double max) {
 
-    public void getAllVehicles() {}
-
-    public void addVehicle(Vehicle v) {
     }
+    public static void getVehiclesByMakeModel (String make, String model) {
 
+    }
+    public static void getVehiclesByYear (int year) {
+
+    }
+    public static void getVehiclesByColor (String color) {
+
+    }
+    public static void getVehiclesByMileage(int odometer) {
+
+    }
+    public static void getVehiclesByVehicleType(String vehicleType) {
+
+    }
+    public static void getAllVehicles() {
+
+    }
+    public static void addVehicle(Vehicle v) {
+
+    }
+    public static void removeVehicle(Vehicle v) {
+
+    }
 }
