@@ -1,23 +1,17 @@
 package com.pluralsight.cars.services;
 
-import com.pluralsight.cars.models.Dealership;
-
+import com.pluralsight.cars.app.DealershipApp;
 import java.util.Scanner;
 
 public class UserInterface {
-    public static final String inventoryCSV = "src/main/resource/inventory.csv";
-    //Boolean condition to exit application screens
-    public static boolean exitApp = false;
-
     //Related to input from user
-    public static String userInput;
+    static String userInput;
 
     //Initializing scanner to read from terminal input
-    public static Scanner inputSc = new Scanner(System.in);
+    static Scanner inputSc = new Scanner(System.in);
 
-    //Instance variable (attribute) for UserInterface
-    public static Dealership dealership;
-
+    //Boolean condition to exit application screens
+    static boolean exitApp = false;
 
 
     public static void showHomeScreen() {
@@ -48,31 +42,40 @@ public class UserInterface {
 
             switch (userInput) {
                 case "1":
-                    Dealership.getVehiclesByPrice();
+                    System.out.println("Enter your desired price range to search from dealership.");
+                    System.out.println("Minimum value: ");
+                    userInput = inputSc.nextLine().trim();
+                    double min = Double.parseDouble(userInput);
+
+                    System.out.println("Maximum value: ");
+                    userInput = inputSc.nextLine().trim();
+                    double max = Double.parseDouble(userInput);
+
+
                     break;
                 case "2":
-                    Dealership.getVehiclesByMakeModel();
+//                    Dealership.getVehiclesByMakeModel();
                     break;
                 case "3":
-                    Dealership.getVehiclesByYear();
+//                    Dealership.getVehiclesByYear();
                     break;
                 case "4":
-                    Dealership.getVehiclesByColor();
+//                    Dealership.getVehiclesByColor();
                     break;
                 case "5":
-                    Dealership.getVehiclesByMileage();
+//                    Dealership.getVehiclesByMileage();
                     break;
                 case "6":
-                    Dealership.getVehiclesByVehicleType();
+//                    Dealership.getVehiclesByVehicleType();
                     break;
                 case "7":
-                    Dealership.getAllVehicles();
+                    processGetAllVehiclesRequest();
                     break;
                 case "8":
-                    Dealership.addVehicle();
+//                    Dealership.addVehicle();
                     break;
                 case "9":
-                    Dealership.removeVehicle();
+//                    Dealership.removeVehicle();
                     break;
                 case "10":
                     exitApp = true;
@@ -84,14 +87,14 @@ public class UserInterface {
 
     }
 
-    public static Dealership retrieveDealership() {
-        dealership = DealershipFileManager.getDealership(inventoryCSV);
-
-        return dealership;
-    }
-
     //Other non-static methods to process user requests
     public void processGetByPriceRequest() {
 
+    }
+
+    //Other non-static methods to process user requests
+    public static void processGetAllVehiclesRequest() {
+//       DealershipApp.dealership.getInventory();
+        DealershipApp.dealership.getAllVehicles();
     }
 }

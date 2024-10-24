@@ -52,4 +52,9 @@ public class Vehicle {
     public double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12d %5.2f", vin, year, make, model, vehicleType, color, odometer, price);
+    }
 }
