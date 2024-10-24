@@ -19,7 +19,7 @@ public class HotelApp {
         Employee e = new Employee(1, "Bob", "Maintenance", 21.00, 30);
 
         //Employee punching in
-        e.punchIn(startTime);
+        e.punchIn(10.0);
 
         System.out.printf("Total Price of Reservation: $%.2f", r.getReservationTotal());
     }
