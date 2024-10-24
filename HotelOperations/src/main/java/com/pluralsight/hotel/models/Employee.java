@@ -1,5 +1,8 @@
 package com.pluralsight.hotel.models;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class Employee {
     private int employeeId;
     private String name;
@@ -37,7 +40,7 @@ public class Employee {
 
     //Non-static methods for Employee
     public double getTotalPay() {
-        return 0.0;
+        return getPayRate() * getHoursWorked();
     }
 
     public double getRegularHours() {
@@ -46,5 +49,13 @@ public class Employee {
 
     public double getOvertimeHours() {
         return 0;
+    }
+
+    public void punchIn(String time) {
+        System.out.println("Clocked in at: " + time);
+    }
+
+    public void punchOut(String time) {
+        System.out.println("Clocked out at: " + time);
     }
 }
