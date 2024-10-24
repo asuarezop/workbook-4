@@ -12,16 +12,17 @@ public class Dealership {
     private String phone;
     private ArrayList<Vehicle> inventory = new ArrayList<>();
 
-    public Dealership(){
+    //Blank constructor to create a new Dealership object when values aren't known
+    public Dealership() {}
 
-    }
-
+    //Constructor to create a new Dealership object when values are known
     public Dealership(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
     }
 
+    //Getters & Setters
     public String getName() {
         return name;
     }
@@ -54,8 +55,19 @@ public class Dealership {
         this.inventory = inventory;
     }
 
+    //Non-static methods for Dealership processing requests
     public void getVehiclesByPrice(double min, double max) {
+        System.out.println("Dealership: " + name);
+        System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
+        for (Vehicle v: inventory) {
+            if (v.getPrice() >= min && v.getPrice() <= max) {
+                System.out.println(v);
+            } else {
+                System.out.println("Result: Cannot find vehicle in your price range. Please try again.");
+                break;
+            }
+        }
     }
 
     public void getVehiclesByMakeModel(String make, String model) {
@@ -79,51 +91,11 @@ public class Dealership {
     }
 
     public void getAllVehicles() {
-
         System.out.println("Inventory for dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
         for (Vehicle v: inventory) {
             System.out.println(v.toString());
         }
-
-//        try {
-//            //Calling openFileReader method to initialize BufferedReader
-//            BufferedReader bufReader = DealershipFileManager.openFileReader(filename);
-//
-//            //Reading each line of input from fileContents
-//            String fileContents;
-//
-//            //Skip the first line of file (header)
-//            bufReader.readLine();
-//
-//            while ((fileContents = bufReader.readLine()) != null) {
-//                String[] dealershipData = fileContents.split("\\|");
-//
-//                //Passing in vehicle data into new ArrayList of vehicles
-//                int vin = Integer.parseInt(dealershipData[0]);
-//                int year = Integer.parseInt(dealershipData[1]);
-//                String make = dealershipData[2];
-//                String model = dealershipData[3];
-//                String type = dealershipData[4];
-//                String color = dealershipData[5];
-//                int miles = Integer.parseInt(dealershipData[6]);
-//                double price = Double.parseDouble(dealershipData[7]);
-//
-//                v = new Vehicle(vin, year, make, model, type, color, miles, price);
-//
-//                //Adding each vehicle inside file to inventory ArrayList
-//                inventory.add(v);
-//            }
-//
-//            //Successfully read file message
-//            System.out.println("File was successfully read!");
-//
-//            //Closing bufReader
-//            bufReader.close();
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     public void addVehicle(Vehicle v) {

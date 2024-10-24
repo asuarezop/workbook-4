@@ -21,6 +21,7 @@ public class Vehicle {
         this.price = price;
     }
 
+    //Getters & Setters
     public int getVin() {
         return vin;
     }

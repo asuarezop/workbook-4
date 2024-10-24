@@ -1,6 +1,7 @@
 package com.pluralsight.cars.services;
 
 import com.pluralsight.cars.app.DealershipApp;
+
 import java.util.Scanner;
 
 public class UserInterface {
@@ -42,16 +43,16 @@ public class UserInterface {
 
             switch (userInput) {
                 case "1":
-                    System.out.println("Enter your desired price range to search from dealership.");
-                    System.out.println("Minimum value: ");
+                    System.out.println("Enter your desired price range to search vehicles from dealership.");
+                    System.out.print("Minimum value: ");
                     userInput = inputSc.nextLine().trim();
                     double min = Double.parseDouble(userInput);
 
-                    System.out.println("Maximum value: ");
+                    System.out.print("Maximum value: ");
                     userInput = inputSc.nextLine().trim();
                     double max = Double.parseDouble(userInput);
 
-
+                    processGetByPriceRequest(min, max);
                     break;
                 case "2":
 //                    Dealership.getVehiclesByMakeModel();
@@ -88,13 +89,13 @@ public class UserInterface {
     }
 
     //Other non-static methods to process user requests
-    public void processGetByPriceRequest() {
-
+    public static void processGetByPriceRequest(double min, double max) {
+        if (min != 0 && max != 0) {
+            DealershipApp.dealership.getVehiclesByPrice(min, max);
+        }
     }
 
-    //Other non-static methods to process user requests
     public static void processGetAllVehiclesRequest() {
-//       DealershipApp.dealership.getInventory();
         DealershipApp.dealership.getAllVehicles();
     }
 }
