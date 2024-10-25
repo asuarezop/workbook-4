@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     //Instance variable for Dealership object
-    private Dealership dealership;
+    private static Dealership dealership;
 
     //Related to input from user
     static String userInput;
@@ -20,9 +20,8 @@ public class UserInterface {
 
     //Constructor to UserInterface
     public UserInterface(Dealership dealership) {
-        this.dealership = dealership;
+        UserInterface.dealership = dealership;
     }
-
 
     public void showHomeScreen() {
         String homeScreenMenuHeader = """
@@ -64,7 +63,14 @@ public class UserInterface {
                     processGetByPriceRequest(min, max);
                     break;
                 case "2":
-//                    Dealership.getVehiclesByMakeModel();
+                    System.out.println("Enter vehicle make and model to search vehicles from dealership.");
+                    System.out.print("Make: ");
+                    String make = inputSc.nextLine().trim();
+
+                    System.out.print("Model: ");
+                    String model = inputSc.nextLine().trim();
+
+                    processGetByMakeModelRequest(make, model);
                     break;
                 case "3":
 //                    Dealership.getVehiclesByYear();
@@ -98,13 +104,19 @@ public class UserInterface {
     }
 
     //Other non-static methods to process user requests
-    public static void processGetByPriceRequest(double min, double max) {
+    public void processGetByPriceRequest(double min, double max) {
         if (min != 0 && max != 0) {
-            DealershipApp.dealership.getVehiclesByPrice(min, max);
+            UserInterface.dealership.getVehiclesByPrice(min, max);
         }
     }
 
-    public static void processGetAllVehiclesRequest() {
-        DealershipApp.dealership.getAllVehicles();
+    public void processGetByMakeModelRequest(String make, String model) {
+        if (!make.isEmpty() && !model.isEmpty()) {
+            UserInterface.dealership.getVehiclesByMakeModel(make, model);
+        }
+    }
+
+    public void processGetAllVehiclesRequest() {
+        UserInterface.dealership.getAllVehicles();
     }
 }

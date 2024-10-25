@@ -59,6 +59,9 @@ public class Dealership {
         for (Vehicle v: inventory) {
             if (v.getPrice() >= min && v.getPrice() <= max) {
                 System.out.println(v);
+            } else if (min < v.getPrice() || max < v.getPrice()) {
+                System.out.println("No vehicles matched your provided price range.");
+                break;
             } else {
                 System.out.println("Result: Cannot find vehicle in your price range. Please try again.");
                 break;
@@ -67,7 +70,14 @@ public class Dealership {
     }
 
     public void getVehiclesByMakeModel(String make, String model) {
+        System.out.println("Dealership: " + name);
+        System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
+        for (Vehicle v: inventory) {
+            if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
+                System.out.println(v);
+            }
+        }
     }
 
     public void getVehiclesByYear(int year) {
