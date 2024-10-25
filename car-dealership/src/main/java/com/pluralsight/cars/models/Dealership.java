@@ -104,12 +104,19 @@ public class Dealership {
         for (Vehicle v: inventory) {
            if (v.getColor().equalsIgnoreCase(color)) {
                System.out.println(v);
-           } 
+           }
         }
     }
 
     public void getVehiclesByMileage(int odometer) {
+        System.out.println("Dealership: " + name);
+        System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
+        for (Vehicle v: inventory) {
+            if (v.getOdometer() == odometer) {
+                System.out.println(v);
+            }
+        }
     }
 
     public void getVehiclesByVehicleType(String vehicleType) {
