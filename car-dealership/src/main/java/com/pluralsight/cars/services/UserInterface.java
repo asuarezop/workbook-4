@@ -88,7 +88,7 @@ public class UserInterface {
                     processGetByColorRequest(vehicleColor);
                     break;
                 case "5":
-                    System.out.println("Enter your vehicle mileage range to search vehicles from dealership.");
+                    System.out.println("Enter your desired mileage range to search vehicles from dealership.");
                     System.out.print("Mileage: ");
                     String vehicleOdometer = inputSc.nextLine().trim();
                     int parsedVehicleOdometer = Integer.parseInt(vehicleOdometer);
@@ -96,7 +96,11 @@ public class UserInterface {
                     processGetByMileageRequest(parsedVehicleOdometer);
                     break;
                 case "6":
-//                    Dealership.getVehiclesByVehicleType();
+                    System.out.println("Enter vehicle type to search vehicles from dealership.");
+                    System.out.print("Type: ");
+                    String vehicleType = inputSc.nextLine().trim();
+
+                    processGetByVehicleTypeRequest(vehicleType);
                     break;
                 case "7":
                     processGetAllVehiclesRequest();
@@ -146,6 +150,12 @@ public class UserInterface {
     public void processGetByMileageRequest(int odometer) {
         if (odometer != 0) {
             UserInterface.dealership.getVehiclesByMileage(odometer);
+        }
+    }
+
+    public void processGetByVehicleTypeRequest(String vehicleType) {
+        if (!vehicleType.isEmpty()) {
+            UserInterface.dealership.getVehiclesByVehicleType(vehicleType);
         }
     }
 

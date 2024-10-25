@@ -120,7 +120,14 @@ public class Dealership {
     }
 
     public void getVehiclesByVehicleType(String vehicleType) {
+        System.out.println("Dealership: " + name);
+        System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
+        for (Vehicle v: inventory) {
+            if (v.getVehicleType().equalsIgnoreCase(vehicleType)) {
+                System.out.println(v);
+            }
+        }
     }
 
     public void getAllVehicles() {
