@@ -62,9 +62,6 @@ public class Dealership {
             } else if (min < v.getPrice() || max < v.getPrice()) {
                 System.out.println("No vehicles matched your provided price range.");
                 break;
-            } else {
-                System.out.println("Result: Cannot find vehicle in your price range. Please try again.");
-                break;
             }
         }
     }
@@ -76,12 +73,25 @@ public class Dealership {
         for (Vehicle v: inventory) {
             if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
                 System.out.println(v);
+            } else {
+                System.out.println("Result: Cannot find vehicle based on your make and model. Please try again.");
+                break;
             }
         }
     }
 
     public void getVehiclesByYear(int year) {
+        System.out.println("Dealership: " + name);
+        System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
+        for (Vehicle v: inventory) {
+            if (v.getYear() == year) {
+                System.out.println(v);
+            } else if (v.getYear() != year) {
+                System.out.println("No vehicles matched your provided year range.");
+                break;
+            }
+        }
     }
 
     public void getVehiclesByColor(String color) {

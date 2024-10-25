@@ -73,7 +73,12 @@ public class UserInterface {
                     processGetByMakeModelRequest(make, model);
                     break;
                 case "3":
-//                    Dealership.getVehiclesByYear();
+                    System.out.println("Enter vehicle year to search vehicles from dealership.");
+                    System.out.print("Year: ");
+                    String year = inputSc.nextLine().trim();
+                    int parsedYear = Integer.parseInt(year);
+
+                    processGetByYearRequest(parsedYear);
                     break;
                 case "4":
 //                    Dealership.getVehiclesByColor();
@@ -113,6 +118,13 @@ public class UserInterface {
     public void processGetByMakeModelRequest(String make, String model) {
         if (!make.isEmpty() && !model.isEmpty()) {
             UserInterface.dealership.getVehiclesByMakeModel(make, model);
+        }
+    }
+
+    public void processGetByYearRequest(int year) {
+        String parsedYear = String.valueOf(year);
+        if (!parsedYear.isEmpty() && parsedYear.length() <= 4) {
+            UserInterface.dealership.getVehiclesByYear(year);
         }
     }
 
