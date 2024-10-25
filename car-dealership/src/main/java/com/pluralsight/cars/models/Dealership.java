@@ -73,8 +73,9 @@ public class Dealership {
         for (Vehicle v: inventory) {
             if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
                 System.out.println(v);
-            } else {
-                System.out.println("Result: Cannot find vehicle based on your make and model. Please try again.");
+                break;
+            } else if (!v.getMake().contains(make) && !v.getModel().contains(model)){
+                System.out.println("Cannot find vehicles based on given make and model.");
                 break;
             }
         }
@@ -87,6 +88,7 @@ public class Dealership {
         for (Vehicle v: inventory) {
             if (v.getYear() == year) {
                 System.out.println(v);
+                break;
             } else if (v.getYear() != year) {
                 System.out.println("No vehicles matched your provided year range.");
                 break;
@@ -94,8 +96,16 @@ public class Dealership {
         }
     }
 
+    //Bugged at the moment when entering yellow as input
     public void getVehiclesByColor(String color) {
+        System.out.println("Dealership: " + name);
+        System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
+        for (Vehicle v: inventory) {
+           if (v.getColor().equalsIgnoreCase(color)) {
+               System.out.println(v);
+           } 
+        }
     }
 
     public void getVehiclesByMileage(int odometer) {

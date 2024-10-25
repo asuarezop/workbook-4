@@ -54,34 +54,38 @@ public class UserInterface {
                     System.out.println("Enter your desired price range to search vehicles from dealership.");
                     System.out.print("Minimum value: ");
                     userInput = inputSc.nextLine().trim();
-                    double min = Double.parseDouble(userInput);
+                    double minPrice = Double.parseDouble(userInput);
 
                     System.out.print("Maximum value: ");
                     userInput = inputSc.nextLine().trim();
-                    double max = Double.parseDouble(userInput);
+                    double maxPrice = Double.parseDouble(userInput);
 
-                    processGetByPriceRequest(min, max);
+                    processGetByPriceRequest(minPrice, maxPrice);
                     break;
                 case "2":
                     System.out.println("Enter vehicle make and model to search vehicles from dealership.");
                     System.out.print("Make: ");
-                    String make = inputSc.nextLine().trim();
+                    String vehicleMake = inputSc.nextLine().trim();
 
                     System.out.print("Model: ");
-                    String model = inputSc.nextLine().trim();
+                    String vehicleModel = inputSc.nextLine().trim();
 
-                    processGetByMakeModelRequest(make, model);
+                    processGetByMakeModelRequest(vehicleMake, vehicleModel);
                     break;
                 case "3":
                     System.out.println("Enter vehicle year to search vehicles from dealership.");
                     System.out.print("Year: ");
-                    String year = inputSc.nextLine().trim();
-                    int parsedYear = Integer.parseInt(year);
+                    String vehicleYear = inputSc.nextLine().trim();
+                    int parsedVehicleYear = Integer.parseInt(vehicleYear);
 
-                    processGetByYearRequest(parsedYear);
+                    processGetByYearRequest(parsedVehicleYear);
                     break;
                 case "4":
-//                    Dealership.getVehiclesByColor();
+                    System.out.println("Enter vehicle color to search vehicles from dealership.");
+                    System.out.print("Color: ");
+                    String vehicleColor = inputSc.nextLine().trim();
+
+                    processGetByColorRequest(vehicleColor);
                     break;
                 case "5":
 //                    Dealership.getVehiclesByMileage();
@@ -125,6 +129,12 @@ public class UserInterface {
         String parsedYear = String.valueOf(year);
         if (!parsedYear.isEmpty() && parsedYear.length() <= 4) {
             UserInterface.dealership.getVehiclesByYear(year);
+        }
+    }
+
+    public void processGetByColorRequest(String color) {
+        if (!color.isEmpty()) {
+            UserInterface.dealership.getVehiclesByColor(color);
         }
     }
 
