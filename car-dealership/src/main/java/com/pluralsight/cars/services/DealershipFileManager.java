@@ -2,9 +2,7 @@ package com.pluralsight.cars.services;
 
 import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
-
 import java.io.*;
-import java.util.ArrayList;
 
 public class DealershipFileManager {
 

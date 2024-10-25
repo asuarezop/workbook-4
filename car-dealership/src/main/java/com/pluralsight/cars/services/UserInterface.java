@@ -1,10 +1,14 @@
 package com.pluralsight.cars.services;
 
 import com.pluralsight.cars.app.DealershipApp;
+import com.pluralsight.cars.models.Dealership;
 
 import java.util.Scanner;
 
 public class UserInterface {
+    //Instance variable for Dealership object
+    private Dealership dealership;
+
     //Related to input from user
     static String userInput;
 
@@ -14,8 +18,13 @@ public class UserInterface {
     //Boolean condition to exit application screens
     static boolean exitApp = false;
 
+    //Constructor to UserInterface
+    public UserInterface(Dealership dealership) {
+        this.dealership = dealership;
+    }
 
-    public static void showHomeScreen() {
+
+    public void showHomeScreen() {
         String homeScreenMenuHeader = """
                 =================================
                 |      DEALERSHIP APP (HOME)    |
