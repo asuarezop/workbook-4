@@ -1,5 +1,8 @@
 package com.pluralsight.cars.models;
 
+import com.pluralsight.cars.services.DealershipFileManager;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Dealership {
@@ -53,7 +56,6 @@ public class Dealership {
 
     //Non-static methods for Dealership processing requests
     public void getVehiclesByPrice(double min, double max) {
-        System.out.println("Dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
         for (Vehicle v: inventory) {
@@ -67,7 +69,6 @@ public class Dealership {
     }
 
     public void getVehiclesByMakeModel(String make, String model) {
-        System.out.println("Dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
         for (Vehicle v: inventory) {
@@ -82,7 +83,6 @@ public class Dealership {
     }
 
     public void getVehiclesByYear(int year) {
-        System.out.println("Dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
         for (Vehicle v: inventory) {
@@ -109,7 +109,6 @@ public class Dealership {
     }
 
     public void getVehiclesByMileage(int odometer) {
-        System.out.println("Dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
         for (Vehicle v: inventory) {
@@ -120,7 +119,6 @@ public class Dealership {
     }
 
     public void getVehiclesByVehicleType(String vehicleType) {
-        System.out.println("Dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
 
         for (Vehicle v: inventory) {
@@ -131,15 +129,14 @@ public class Dealership {
     }
 
     public void getAllVehicles() {
-        System.out.println("Inventory for dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));
         for (Vehicle v: inventory) {
             System.out.println(v.toString());
         }
     }
 
-    public void addVehicle(Vehicle v) {
-
+    public void addVehicle(Vehicle v) throws IOException {
+        DealershipFileManager.saveDealership(v, inventory);
     }
 
     public void removeVehicle(Vehicle v) {

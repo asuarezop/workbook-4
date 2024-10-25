@@ -2,7 +2,9 @@ package com.pluralsight.cars.services;
 
 import com.pluralsight.cars.app.DealershipApp;
 import com.pluralsight.cars.models.Dealership;
+import com.pluralsight.cars.models.Vehicle;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -23,7 +25,7 @@ public class UserInterface {
         UserInterface.dealership = dealership;
     }
 
-    public void showHomeScreen() {
+    public void showHomeScreen() throws IOException {
         String homeScreenMenuHeader = """
                 =================================
                 |      DEALERSHIP APP (HOME)    |
@@ -51,7 +53,7 @@ public class UserInterface {
 
             switch (userInput) {
                 case "1":
-                    System.out.println("Enter your desired price range to search vehicles from dealership.");
+                    System.out.println("Enter your desired price range to search vehicles from dealership: " + UserInterface.dealership.getName());
                     System.out.print("Minimum value: ");
                     userInput = inputSc.nextLine().trim();
                     double minPrice = Double.parseDouble(userInput);
@@ -63,7 +65,7 @@ public class UserInterface {
                     processGetByPriceRequest(minPrice, maxPrice);
                     break;
                 case "2":
-                    System.out.println("Enter vehicle make and model to search vehicles from dealership.");
+                    System.out.println("Enter vehicle make and model to search vehicles from dealership: " + UserInterface.dealership.getName());
                     System.out.print("Make: ");
                     String vehicleMake = inputSc.nextLine().trim();
 
@@ -73,7 +75,7 @@ public class UserInterface {
                     processGetByMakeModelRequest(vehicleMake, vehicleModel);
                     break;
                 case "3":
-                    System.out.println("Enter vehicle year to search vehicles from dealership.");
+                    System.out.println("Enter vehicle year to search vehicles from dealership: " + UserInterface.dealership.getName());
                     System.out.print("Year: ");
                     String vehicleYear = inputSc.nextLine().trim();
                     int parsedVehicleYear = Integer.parseInt(vehicleYear);
@@ -81,14 +83,14 @@ public class UserInterface {
                     processGetByYearRequest(parsedVehicleYear);
                     break;
                 case "4":
-                    System.out.println("Enter vehicle color to search vehicles from dealership.");
+                    System.out.println("Enter vehicle color to search vehicles from dealership: " + UserInterface.dealership.getName());
                     System.out.print("Color: ");
                     String vehicleColor = inputSc.nextLine().trim();
 
                     processGetByColorRequest(vehicleColor);
                     break;
                 case "5":
-                    System.out.println("Enter your desired mileage range to search vehicles from dealership.");
+                    System.out.println("Enter your desired mileage range to search vehicles from dealership: " + UserInterface.dealership.getName());
                     System.out.print("Mileage: ");
                     String vehicleOdometer = inputSc.nextLine().trim();
                     int parsedVehicleOdometer = Integer.parseInt(vehicleOdometer);
@@ -96,17 +98,50 @@ public class UserInterface {
                     processGetByMileageRequest(parsedVehicleOdometer);
                     break;
                 case "6":
-                    System.out.println("Enter vehicle type to search vehicles from dealership.");
+                    System.out.println("Enter vehicle type to search vehicles from dealership: " + UserInterface.dealership.getName());
                     System.out.print("Type: ");
                     String vehicleType = inputSc.nextLine().trim();
 
                     processGetByVehicleTypeRequest(vehicleType);
                     break;
                 case "7":
+                    System.out.println("Inventory for dealership: " + UserInterface.dealership.getName());
                     processGetAllVehiclesRequest();
                     break;
                 case "8":
-//                    Dealership.addVehicle();
+                    Vehicle v;
+                    System.out.println("Enter new vehicle to add onto dealership: " + UserInterface.dealership.getName());
+                    System.out.print("VIN: ");
+                    String usedVehicleVIN = inputSc.nextLine().trim();
+                    int parsedUsedVehicleVIN = Integer.parseInt(usedVehicleVIN);
+
+                    System.out.print("Year: ");
+                    String usedVehicleYear = inputSc.nextLine().trim();
+                    int parsedUsedVehicleYear = Integer.parseInt(usedVehicleYear);
+
+                    System.out.print("Make: ");
+                    String usedVehicleMake = inputSc.nextLine().trim();
+
+                    System.out.print("Model: ");
+                    String usedVehicleModel = inputSc.nextLine().trim();
+
+                    System.out.print("Type: ");
+                    String usedVehicleType = inputSc.nextLine().trim();
+
+                    System.out.print("Color: ");
+                    String usedVehicleColor = inputSc.nextLine().trim();
+
+                    System.out.print("Mileage: ");
+                    String usedVehicleMileage = inputSc.nextLine().trim();
+                    int parsedUsedVehicleMileage = Integer.parseInt(usedVehicleMileage);
+
+                    System.out.print("Price: ");
+                    String usedVehiclePrice = inputSc.nextLine().trim();
+                    double parsedUsedVehiclePrice = Double.parseDouble(usedVehiclePrice);
+
+                    v = new Vehicle(parsedUsedVehicleVIN, parsedUsedVehicleYear, usedVehicleMake, usedVehicleModel, usedVehicleType, usedVehicleColor, parsedUsedVehicleMileage, parsedUsedVehiclePrice);
+
+                    processAddVehicleRequest(v);
                     break;
                 case "9":
 //                    Dealership.removeVehicle();
@@ -118,7 +153,6 @@ public class UserInterface {
                     throw new Error("Sorry, that's not a valid option. Please make your selection.");
             }
         } while (!exitApp);
-
     }
 
     //Other non-static methods to process user requests
@@ -136,7 +170,7 @@ public class UserInterface {
 
     public void processGetByYearRequest(int year) {
         String parsedYear = String.valueOf(year);
-        if (!parsedYear.isEmpty() && parsedYear.length() <= 4) {
+        if (year != 0 && parsedYear.length() <= 4) {
             UserInterface.dealership.getVehiclesByYear(year);
         }
     }
@@ -161,5 +195,9 @@ public class UserInterface {
 
     public void processGetAllVehiclesRequest() {
         UserInterface.dealership.getAllVehicles();
+    }
+
+    public void processAddVehicleRequest(Vehicle v) throws IOException {
+        UserInterface.dealership.addVehicle(v);
     }
 }

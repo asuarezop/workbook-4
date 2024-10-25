@@ -4,14 +4,16 @@ import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.services.DealershipFileManager;
 import com.pluralsight.cars.services.UserInterface;
 
+import java.io.IOException;
+
 public class DealershipApp {
     //String variable to hold inventory CSV file path
-    static final String inventoryCSV = "src/main/resources/inventory.csv";
+    public static final String inventoryCSV = "src/main/resources/inventory.csv";
 
     //Local variable to hold a dealership
     public static Dealership dealership;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Calling initialization method for program
         init();
 
