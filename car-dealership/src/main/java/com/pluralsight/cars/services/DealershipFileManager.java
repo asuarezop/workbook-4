@@ -1,6 +1,5 @@
 package com.pluralsight.cars.services;
 
-import com.pluralsight.cars.app.DealershipApp;
 import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
 import java.io.*;
@@ -20,7 +19,7 @@ public class DealershipFileManager {
 
     //Retrieving a Dealership object, load and read from inventory.csv
     public static Dealership getDealership() {
-        Dealership d = new Dealership();
+        Dealership d = null;
         Vehicle v;
 
         try {
@@ -35,9 +34,7 @@ public class DealershipFileManager {
 
                 if(fileContents.startsWith("D")) {
                     //Constructing a new Dealership object and passing in header data from inventory.csv
-                    d.setName(dealershipData[0]);
-                    d.setAddress(dealershipData[1]);
-                    d.setPhone(dealershipData[2]);
+                    d = new Dealership(dealershipData[0], dealershipData[1], dealershipData[2]);
                     continue;
                 }
 

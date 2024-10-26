@@ -150,7 +150,7 @@ public class UserInterface {
                     break;
                 case "9":
                     Vehicle removedVehicle;
-                    System.out.println("Enter desired vehicle you wish to remove from dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter desired vehicle you wish to remove from dealership: " + dealership.getName());
                     System.out.print("VIN: ");
                     String vehicleVin = inputSc.nextLine().trim();
                     int parsedVehicleVin = Integer.parseInt(vehicleVin);

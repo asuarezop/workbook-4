@@ -1,9 +1,5 @@
 package com.pluralsight.cars.models;
 
-import com.pluralsight.cars.app.DealershipApp;
-import com.pluralsight.cars.services.DealershipFileManager;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Dealership {
@@ -12,10 +8,7 @@ public class Dealership {
     private String phone;
     private ArrayList<Vehicle> inventory = new ArrayList<>();
 
-    //Blank constructor to create a new Dealership object when values aren't known
-    public Dealership() {}
-
-    //Constructor to create a new Dealership object when values are known
+    //Constructor to create a new Dealership object
     public Dealership(String name, String address, String phone) {
         this.name = name;
         this.address = address;
@@ -136,18 +129,17 @@ public class Dealership {
         }
     }
 
-    public void addVehicle(Vehicle v) throws IOException {
+    public void addVehicle(Vehicle v) {
         inventory.add(v);
-
         //Confirmation message
         System.out.println("Vehicle was added to current inventory!");
     }
 
-    public void removeVehicle(Vehicle v) throws IOException {
-        inventory.remove(v);
-
+    public void removeVehicle(Vehicle v) {
+        //Removing vehicle if it matches VIN inside current dealership inventory
+        inventory.removeIf(c -> c.getVin() == v.getVin());
         //Confirmation message
-        System.out.println("Vehicle removed from dealership: " + DealershipApp.dealership.getName());
+        System.out.println("Vehicle removed from dealership.");
     }
 
     @Override
