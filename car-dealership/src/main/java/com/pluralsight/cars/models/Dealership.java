@@ -1,5 +1,4 @@
 package com.pluralsight.cars.models;
-
 import java.util.ArrayList;
 
 public class Dealership {
@@ -90,7 +89,7 @@ public class Dealership {
         }
     }
 
-    //Bugged at the moment when entering yellow as input
+    //Bugged at the moment when adding else with error message
     public void getVehiclesByColor(String color) {
         System.out.println("Dealership: " + name);
         System.out.println(String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price"));

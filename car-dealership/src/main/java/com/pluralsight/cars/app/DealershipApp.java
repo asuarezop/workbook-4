@@ -1,5 +1,4 @@
 package com.pluralsight.cars.app;
-
 import com.pluralsight.cars.services.UserInterface;
 import java.io.IOException;
 

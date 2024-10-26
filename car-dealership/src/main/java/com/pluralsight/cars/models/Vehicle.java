@@ -10,6 +10,7 @@ public class Vehicle {
     private int odometer;
     private double price;
 
+    //Constructing a vehicle object with only a VIN
     public Vehicle(int vin) {
         this.vin = vin;
     }
@@ -25,7 +26,7 @@ public class Vehicle {
         this.price = price;
     }
 
-    //Getters & Setters
+    //Getters
     public int getVin() {
         return vin;
     }

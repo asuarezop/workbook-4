@@ -1,5 +1,4 @@
 package com.pluralsight.cars.services;
-
 import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
 import java.io.*;
@@ -54,8 +53,6 @@ public class DealershipFileManager {
                 //Adding each vehicle to inventory ArrayList
                 d.getInventory().add(v);
             }
-
-            //Closing bufReader
             bufReader.close();
 
             //Returning back Dealership object

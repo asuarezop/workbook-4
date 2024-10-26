@@ -1,9 +1,7 @@
 package com.pluralsight.cars.services;
 
-import com.pluralsight.cars.app.DealershipApp;
 import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
-
 import java.io.IOException;
 import java.util.Scanner;
 
