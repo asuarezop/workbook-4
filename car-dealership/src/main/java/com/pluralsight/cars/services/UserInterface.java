@@ -9,7 +9,10 @@ import java.util.Scanner;
 
 public class UserInterface {
     //Instance variable for Dealership object
-    private static Dealership dealership;
+    private Dealership dealership;
+
+    //String variable to hold inventory CSV file path
+    public static final String inventoryCSV = "src/main/resources/inventory.csv";
 
     //Related to input from user
     static String userInput;
@@ -20,9 +23,10 @@ public class UserInterface {
     //Boolean condition to exit application screens
     static boolean exitApp = false;
 
-    //Constructor to UserInterface
-    public UserInterface(Dealership dealership) {
-        UserInterface.dealership = dealership;
+    //init(): This method gets called first before any other methods are run inside main()
+    private void init(){
+        //To get a new dealership object and have object initialized with returned dealership
+        this.dealership = DealershipFileManager.getDealership();
     }
 
     public void showHomeScreen() throws IOException {
@@ -47,13 +51,14 @@ public class UserInterface {
                 """;
 
         do {
+            init();
             System.out.println(homeScreenMenuHeader);
             System.out.println(prompt);
             userInput = inputSc.nextLine().trim();
 
             switch (userInput) {
                 case "1":
-                    System.out.println("Enter your desired price range to search vehicles from dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter your desired price range to search vehicles from dealership: " + dealership.getName());
                     System.out.print("Minimum value: ");
                     userInput = inputSc.nextLine().trim();
                     double minPrice = Double.parseDouble(userInput);
@@ -65,7 +70,7 @@ public class UserInterface {
                     processGetByPriceRequest(minPrice, maxPrice);
                     break;
                 case "2":
-                    System.out.println("Enter vehicle make and model to search vehicles from dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter vehicle make and model to search vehicles from dealership: " + dealership.getName());
                     System.out.print("Make: ");
                     String vehicleMake = inputSc.nextLine().trim();
 
@@ -75,7 +80,7 @@ public class UserInterface {
                     processGetByMakeModelRequest(vehicleMake, vehicleModel);
                     break;
                 case "3":
-                    System.out.println("Enter vehicle year to search vehicles from dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter vehicle year to search vehicles from dealership: " + dealership.getName());
                     System.out.print("Year: ");
                     String vehicleYear = inputSc.nextLine().trim();
                     int parsedVehicleYear = Integer.parseInt(vehicleYear);
@@ -83,14 +88,14 @@ public class UserInterface {
                     processGetByYearRequest(parsedVehicleYear);
                     break;
                 case "4":
-                    System.out.println("Enter vehicle color to search vehicles from dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter vehicle color to search vehicles from dealership: " + dealership.getName());
                     System.out.print("Color: ");
                     String vehicleColor = inputSc.nextLine().trim();
 
                     processGetByColorRequest(vehicleColor);
                     break;
                 case "5":
-                    System.out.println("Enter your desired mileage range to search vehicles from dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter your desired mileage range to search vehicles from dealership: " + dealership.getName());
                     System.out.print("Mileage: ");
                     String vehicleOdometer = inputSc.nextLine().trim();
                     int parsedVehicleOdometer = Integer.parseInt(vehicleOdometer);
@@ -98,19 +103,19 @@ public class UserInterface {
                     processGetByMileageRequest(parsedVehicleOdometer);
                     break;
                 case "6":
-                    System.out.println("Enter vehicle type to search vehicles from dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter vehicle type to search vehicles from dealership: " + dealership.getName());
                     System.out.print("Type: ");
                     String vehicleType = inputSc.nextLine().trim();
 
                     processGetByVehicleTypeRequest(vehicleType);
                     break;
                 case "7":
-                    System.out.println("Inventory for dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Inventory for dealership: " + dealership.getName());
                     processGetAllVehiclesRequest();
                     break;
                 case "8":
                     Vehicle v;
-                    System.out.println("Enter new vehicle to add onto dealership: " + UserInterface.dealership.getName());
+                    System.out.println("Enter new vehicle to add onto dealership: " + dealership.getName());
                     System.out.print("VIN: ");
                     String usedVehicleVIN = inputSc.nextLine().trim();
                     int parsedUsedVehicleVIN = Integer.parseInt(usedVehicleVIN);
@@ -144,7 +149,15 @@ public class UserInterface {
                     processAddVehicleRequest(v);
                     break;
                 case "9":
-//                    Dealership.removeVehicle();
+                    Vehicle removedVehicle;
+                    System.out.println("Enter desired vehicle you wish to remove from dealership: " + UserInterface.dealership.getName());
+                    System.out.print("VIN: ");
+                    String vehicleVin = inputSc.nextLine().trim();
+                    int parsedVehicleVin = Integer.parseInt(vehicleVin);
+
+                    removedVehicle = new Vehicle(parsedVehicleVin);
+
+                    processRemoveVehicleRequest(removedVehicle);
                     break;
                 case "10":
                     exitApp = true;
@@ -158,46 +171,52 @@ public class UserInterface {
     //Other non-static methods to process user requests
     public void processGetByPriceRequest(double min, double max) {
         if (min != 0 && max != 0) {
-            UserInterface.dealership.getVehiclesByPrice(min, max);
+            dealership.getVehiclesByPrice(min, max);
         }
     }
 
     public void processGetByMakeModelRequest(String make, String model) {
         if (!make.isEmpty() && !model.isEmpty()) {
-            UserInterface.dealership.getVehiclesByMakeModel(make, model);
+            dealership.getVehiclesByMakeModel(make, model);
         }
     }
 
     public void processGetByYearRequest(int year) {
         String parsedYear = String.valueOf(year);
         if (year != 0 && parsedYear.length() <= 4) {
-            UserInterface.dealership.getVehiclesByYear(year);
+            dealership.getVehiclesByYear(year);
         }
     }
 
     public void processGetByColorRequest(String color) {
         if (!color.isEmpty()) {
-            UserInterface.dealership.getVehiclesByColor(color);
+            dealership.getVehiclesByColor(color);
         }
     }
 
     public void processGetByMileageRequest(int odometer) {
         if (odometer != 0) {
-            UserInterface.dealership.getVehiclesByMileage(odometer);
+         dealership.getVehiclesByMileage(odometer);
         }
     }
 
     public void processGetByVehicleTypeRequest(String vehicleType) {
         if (!vehicleType.isEmpty()) {
-            UserInterface.dealership.getVehiclesByVehicleType(vehicleType);
+            dealership.getVehiclesByVehicleType(vehicleType);
         }
     }
 
     public void processGetAllVehiclesRequest() {
-        UserInterface.dealership.getAllVehicles();
+        dealership.getAllVehicles();
     }
 
     public void processAddVehicleRequest(Vehicle v) throws IOException {
-        UserInterface.dealership.addVehicle(v);
+        dealership.addVehicle(v);
+        DealershipFileManager.saveDealership(dealership);
+    }
+
+    public void processRemoveVehicleRequest(Vehicle v) throws IOException {
+        dealership.removeVehicle(v);
+        DealershipFileManager.saveDealership(dealership);
     }
 }

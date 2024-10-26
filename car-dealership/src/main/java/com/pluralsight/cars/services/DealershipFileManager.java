@@ -4,31 +4,28 @@ import com.pluralsight.cars.app.DealershipApp;
 import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
 import java.io.*;
-import java.util.ArrayList;
 
 public class DealershipFileManager {
-
+    //Initializing the BufferedWriter
     public static BufferedWriter getBufferedWriter(String filename) throws IOException {
-        //Set fileWriter to append mode in order to prevent data from being overwritten
         BufferedWriter bufWriter = new BufferedWriter(new FileWriter(filename));
         return bufWriter;
     }
 
     //Initializing the BufferedReader
     public static BufferedReader openFileReader(String filename) throws FileNotFoundException {
-        //Creating a new BufferedReader object to read file and initializing it to read contents from FileReader
         BufferedReader bufReader = new BufferedReader(new FileReader(filename));
         return bufReader;
     }
 
-    //Retrieving a Dealership object, load and read inventory.csv
-    public static Dealership getDealership(String filename) {
+    //Retrieving a Dealership object, load and read from inventory.csv
+    public static Dealership getDealership() {
         Dealership d = new Dealership();
         Vehicle v;
 
         try {
             //Calling openFileReader method to initialize BufferedReader
-            BufferedReader bufReader = openFileReader(filename);
+            BufferedReader bufReader = openFileReader(UserInterface.inventoryCSV);
 
             //Reading each line of input from fileContents
             String fileContents;
@@ -72,19 +69,18 @@ public class DealershipFileManager {
         }
     }
 
-    public static void saveDealership(Vehicle v, ArrayList<Vehicle> inventory) throws IOException {
+    public static void saveDealership(Dealership d) throws IOException {
         try {
-            BufferedWriter bufWriter = getBufferedWriter(DealershipApp.inventoryCSV);
+            BufferedWriter bufWriter = getBufferedWriter(UserInterface.inventoryCSV);
 
-            //Writing vehicle object to inventory.csv
-            bufWriter.write(v.getVin() + "|" + v.getYear() + "|" + v.getMake() + "|" + v.getModel() + "|" + v.getVehicleType() + "|" + v.getColor() + "|" + v.getOdometer() + "|");
-            bufWriter.write(String.format("%.2f \n", v.getPrice()));
+            //Writing dealership header to csv file
+            bufWriter.write(d.getName() + "|" + d.getAddress() + "|" + d.getPhone() + "\n");
 
-            //Adding new vehicle into inventory of current dealership
-            inventory.add(v);
-
-            //Successfully written to file message
-            System.out.println("Vehicle was added to current inventory!");
+            //Writing all vehicles from dealership inventory to csv file
+            for (Vehicle v: d.getInventory()) {
+                bufWriter.write(v.getVin() + "|" + v.getYear() + "|" + v.getMake() + "|" + v.getModel() + "|" + v.getVehicleType() + "|" + v.getColor() + "|" + v.getOdometer() + "|");
+                bufWriter.write(String.format("%.2f \n", v.getPrice()));
+            }
 
             bufWriter.close();
         } catch (IOException e) {

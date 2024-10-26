@@ -1,5 +1,6 @@
 package com.pluralsight.cars.models;
 
+import com.pluralsight.cars.app.DealershipApp;
 import com.pluralsight.cars.services.DealershipFileManager;
 
 import java.io.IOException;
@@ -136,12 +137,19 @@ public class Dealership {
     }
 
     public void addVehicle(Vehicle v) throws IOException {
-        DealershipFileManager.saveDealership(v, inventory);
+        inventory.add(v);
+
+        //Confirmation message
+        System.out.println("Vehicle was added to current inventory!");
     }
 
-    public void removeVehicle(Vehicle v) {
+    public void removeVehicle(Vehicle v) throws IOException {
+        inventory.remove(v);
 
+        //Confirmation message
+        System.out.println("Vehicle removed from dealership: " + DealershipApp.dealership.getName());
     }
+
     @Override
     public String toString() {
         return String.format("%-12s, %-15s, %-12s", name, address, phone);
