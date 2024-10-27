@@ -56,106 +56,31 @@ public class UserInterface {
 
             switch (userInput) {
                 case "1":
-                    System.out.println("Enter your desired price range to search vehicles from dealership: " + dealership.getName());
-                    System.out.print("Minimum value: ");
-                    userInput = inputSc.nextLine().trim();
-                    double minPrice = Double.parseDouble(userInput);
-
-                    System.out.print("Maximum value: ");
-                    userInput = inputSc.nextLine().trim();
-                    double maxPrice = Double.parseDouble(userInput);
-
-                    processGetByPriceRequest(minPrice, maxPrice);
+                    processGetByPriceRequest();
                     break;
                 case "2":
-                    System.out.println("Enter vehicle make and model to search vehicles from dealership: " + dealership.getName());
-                    System.out.print("Make: ");
-                    String vehicleMake = inputSc.nextLine().trim();
-
-                    System.out.print("Model: ");
-                    String vehicleModel = inputSc.nextLine().trim();
-
-                    processGetByMakeModelRequest(vehicleMake, vehicleModel);
+                    processGetByMakeModelRequest();
                     break;
                 case "3":
-                    System.out.println("Enter vehicle year to search vehicles from dealership: " + dealership.getName());
-                    System.out.print("Year: ");
-                    String vehicleYear = inputSc.nextLine().trim();
-                    int parsedVehicleYear = Integer.parseInt(vehicleYear);
-
-                    processGetByYearRequest(parsedVehicleYear);
+                    processGetByYearRequest();
                     break;
                 case "4":
-                    System.out.println("Enter vehicle color to search vehicles from dealership: " + dealership.getName());
-                    System.out.print("Color: ");
-                    String vehicleColor = inputSc.nextLine().trim();
-
-                    processGetByColorRequest(vehicleColor);
+                    processGetByColorRequest();
                     break;
                 case "5":
-                    System.out.println("Enter your desired mileage range to search vehicles from dealership: " + dealership.getName());
-                    System.out.print("Mileage: ");
-                    String vehicleOdometer = inputSc.nextLine().trim();
-                    int parsedVehicleOdometer = Integer.parseInt(vehicleOdometer);
-
-                    processGetByMileageRequest(parsedVehicleOdometer);
+                    processGetByMileageRequest();
                     break;
                 case "6":
-                    System.out.println("Enter vehicle type to search vehicles from dealership: " + dealership.getName());
-                    System.out.print("Type: ");
-                    String vehicleType = inputSc.nextLine().trim();
-
-                    processGetByVehicleTypeRequest(vehicleType);
+                    processGetByVehicleTypeRequest();
                     break;
                 case "7":
-                    System.out.println("Inventory for dealership: " + dealership.getName());
                     processGetAllVehiclesRequest();
                     break;
                 case "8":
-                    Vehicle v;
-                    System.out.println("Enter new vehicle to add onto dealership: " + dealership.getName());
-                    System.out.print("VIN: ");
-                    String usedVehicleVIN = inputSc.nextLine().trim();
-                    int parsedUsedVehicleVIN = Integer.parseInt(usedVehicleVIN);
-
-                    System.out.print("Year: ");
-                    String usedVehicleYear = inputSc.nextLine().trim();
-                    int parsedUsedVehicleYear = Integer.parseInt(usedVehicleYear);
-
-                    System.out.print("Make: ");
-                    String usedVehicleMake = inputSc.nextLine().trim();
-
-                    System.out.print("Model: ");
-                    String usedVehicleModel = inputSc.nextLine().trim();
-
-                    System.out.print("Type: ");
-                    String usedVehicleType = inputSc.nextLine().trim();
-
-                    System.out.print("Color: ");
-                    String usedVehicleColor = inputSc.nextLine().trim();
-
-                    System.out.print("Mileage: ");
-                    String usedVehicleMileage = inputSc.nextLine().trim();
-                    int parsedUsedVehicleMileage = Integer.parseInt(usedVehicleMileage);
-
-                    System.out.print("Price: ");
-                    String usedVehiclePrice = inputSc.nextLine().trim();
-                    double parsedUsedVehiclePrice = Double.parseDouble(usedVehiclePrice);
-
-                    v = new Vehicle(parsedUsedVehicleVIN, parsedUsedVehicleYear, usedVehicleMake, usedVehicleModel, usedVehicleType, usedVehicleColor, parsedUsedVehicleMileage, parsedUsedVehiclePrice);
-
-                    processAddVehicleRequest(v);
+                    processAddVehicleRequest();
                     break;
                 case "9":
-                    Vehicle removedVehicle;
-                    System.out.println("Enter desired vehicle you wish to remove from dealership: " + dealership.getName());
-                    System.out.print("VIN: ");
-                    String vehicleVin = inputSc.nextLine().trim();
-                    int parsedVehicleVin = Integer.parseInt(vehicleVin);
-
-                    removedVehicle = new Vehicle(parsedVehicleVin);
-
-                    processRemoveVehicleRequest(removedVehicle);
+                    processRemoveVehicleRequest();
                     break;
                 case "10":
                     exitApp = true;
@@ -167,53 +92,132 @@ public class UserInterface {
     }
 
     //Other non-static methods to process user requests
-    public void processGetByPriceRequest(double min, double max) {
-        if (min != 0 && max != 0) {
-            dealership.getVehiclesByPrice(min, max);
+    public void processGetByPriceRequest() {
+        System.out.println("Enter your desired price range to search vehicles from dealership: " + dealership.getName());
+        System.out.print("Minimum value: ");
+        userInput = inputSc.nextLine().trim();
+        double minPrice = Double.parseDouble(userInput);
+
+        System.out.print("Maximum value: ");
+        userInput = inputSc.nextLine().trim();
+        double maxPrice = Double.parseDouble(userInput);
+
+        if (minPrice != 0 && maxPrice != 0) {
+            dealership.getVehiclesByPrice(minPrice, maxPrice);
         }
     }
 
-    public void processGetByMakeModelRequest(String make, String model) {
-        if (!make.isEmpty() && !model.isEmpty()) {
-            dealership.getVehiclesByMakeModel(make, model);
+    public void processGetByMakeModelRequest() {
+        System.out.println("Enter vehicle make and model to search vehicles from dealership: " + dealership.getName());
+        System.out.print("Make: ");
+        String vehicleMake = inputSc.nextLine().trim();
+
+        System.out.print("Model: ");
+        String vehicleModel = inputSc.nextLine().trim();
+
+        if (!vehicleMake.isEmpty() && !vehicleModel.isEmpty()) {
+            dealership.getVehiclesByMakeModel(vehicleMake, vehicleModel);
         }
     }
 
-    public void processGetByYearRequest(int year) {
+    public void processGetByYearRequest() {
+        System.out.println("Enter vehicle year to search vehicles from dealership: " + dealership.getName());
+        System.out.print("Year: ");
+        String vehicleYear = inputSc.nextLine().trim();
+        int year = Integer.parseInt(vehicleYear);
+
         String parsedYear = String.valueOf(year);
-        if (year != 0 && parsedYear.length() <= 4) {
+
+        //Checking length of String parsedYear is not greater than 4
+        if (year != 0 && parsedYear.length() == 4) {
             dealership.getVehiclesByYear(year);
+        } else {
+            System.out.println("Invalid year. Please try again.");
         }
     }
 
-    public void processGetByColorRequest(String color) {
-        if (!color.isEmpty()) {
-            dealership.getVehiclesByColor(color);
+    public void processGetByColorRequest() {
+        System.out.println("Enter vehicle color to search vehicles from dealership: " + dealership.getName());
+        System.out.print("Color: ");
+        String vehicleColor = inputSc.nextLine().trim();
+
+        if (!vehicleColor.isEmpty()) {
+            dealership.getVehiclesByColor(vehicleColor);
         }
     }
 
-    public void processGetByMileageRequest(int odometer) {
-        if (odometer != 0) {
-         dealership.getVehiclesByMileage(odometer);
+    public void processGetByMileageRequest() {
+        System.out.println("Enter your desired mileage range to search vehicles from dealership: " + dealership.getName());
+        System.out.print("Mileage: ");
+        String vehicleOdometer = inputSc.nextLine().trim();
+        int parsedVehicleOdometer = Integer.parseInt(vehicleOdometer);
+
+        if (parsedVehicleOdometer != 0) {
+         dealership.getVehiclesByMileage(parsedVehicleOdometer);
         }
     }
 
-    public void processGetByVehicleTypeRequest(String vehicleType) {
+    public void processGetByVehicleTypeRequest() {
+        System.out.println("Enter vehicle type to search vehicles from dealership: " + dealership.getName());
+        System.out.print("Type: ");
+        String vehicleType = inputSc.nextLine().trim();
+
         if (!vehicleType.isEmpty()) {
             dealership.getVehiclesByVehicleType(vehicleType);
         }
     }
 
     public void processGetAllVehiclesRequest() {
+        System.out.println("Inventory for dealership: " + dealership.getName());
         dealership.getAllVehicles();
     }
 
-    public void processAddVehicleRequest(Vehicle v) throws IOException {
+    public void processAddVehicleRequest() throws IOException {
+        Vehicle v;
+        System.out.println("Enter new vehicle to add onto dealership: " + dealership.getName());
+        System.out.print("VIN: ");
+        String usedVehicleVIN = inputSc.nextLine().trim();
+        int parsedUsedVehicleVIN = Integer.parseInt(usedVehicleVIN);
+
+        System.out.print("Year: ");
+        String usedVehicleYear = inputSc.nextLine().trim();
+        int parsedUsedVehicleYear = Integer.parseInt(usedVehicleYear);
+
+        System.out.print("Make: ");
+        String usedVehicleMake = inputSc.nextLine().trim();
+
+        System.out.print("Model: ");
+        String usedVehicleModel = inputSc.nextLine().trim();
+
+        System.out.print("Type: ");
+        String usedVehicleType = inputSc.nextLine().trim();
+
+        System.out.print("Color: ");
+        String usedVehicleColor = inputSc.nextLine().trim();
+
+        System.out.print("Mileage: ");
+        String usedVehicleMileage = inputSc.nextLine().trim();
+        int parsedUsedVehicleMileage = Integer.parseInt(usedVehicleMileage);
+
+        System.out.print("Price: ");
+        String usedVehiclePrice = inputSc.nextLine().trim();
+        double parsedUsedVehiclePrice = Double.parseDouble(usedVehiclePrice);
+
+        v = new Vehicle(parsedUsedVehicleVIN, parsedUsedVehicleYear, usedVehicleMake, usedVehicleModel, usedVehicleType, usedVehicleColor, parsedUsedVehicleMileage, parsedUsedVehiclePrice);
+
         dealership.addVehicle(v);
         DealershipFileManager.saveDealership(dealership);
     }
 
-    public void processRemoveVehicleRequest(Vehicle v) throws IOException {
+    public void processRemoveVehicleRequest() throws IOException {
+        Vehicle v;
+        System.out.println("Enter desired vehicle you wish to remove from dealership: " + dealership.getName());
+        System.out.print("VIN: ");
+        String vehicleVin = inputSc.nextLine().trim();
+        int parsedVehicleVin = Integer.parseInt(vehicleVin);
+
+        v = new Vehicle(parsedVehicleVin);
+
         dealership.removeVehicle(v);
         DealershipFileManager.saveDealership(dealership);
     }

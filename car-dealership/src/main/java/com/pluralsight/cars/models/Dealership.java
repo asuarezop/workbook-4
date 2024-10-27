@@ -68,9 +68,6 @@ public class Dealership {
             if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
                 System.out.println(v);
                 break;
-            } else if (!v.getMake().contains(make) && !v.getModel().contains(model)){
-                System.out.println("Cannot find vehicles based on given make and model.");
-                break;
             }
         }
     }
@@ -81,9 +78,6 @@ public class Dealership {
         for (Vehicle v: inventory) {
             if (v.getYear() == year) {
                 System.out.println(v);
-                break;
-            } else if (v.getYear() != year) {
-                System.out.println("No vehicles matched your provided year range.");
                 break;
             }
         }
