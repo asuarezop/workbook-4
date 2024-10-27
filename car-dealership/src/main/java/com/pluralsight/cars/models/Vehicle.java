@@ -1,7 +1,7 @@
 package com.pluralsight.cars.models;
 
 public class Vehicle {
-    private int vin;
+    private final int vin;
     private int year;
     private String make;
     private String model;
@@ -61,6 +61,6 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return String.format("%-10s %-10s %-10s %-15s %-12s %-10s %-12d %5.2f", vin, year, make, model, vehicleType, color, odometer, price);
+        return String.format("%-10s %-8s %-15s %-13s %-17s %-10s %-12d %5.2f", vin, year, make, model, vehicleType, color, odometer, price);
     }
 }

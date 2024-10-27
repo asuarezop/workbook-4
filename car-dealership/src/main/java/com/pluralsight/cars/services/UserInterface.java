@@ -195,7 +195,7 @@ public class UserInterface {
 
     public void processRemoveVehicleRequest() throws IOException {
         Vehicle v;
-        promptInstructions("Enter desired vehicle you wish to remove from:  " + dealership.getName() + "inventory");
+        promptInstructions("Enter desired vehicle you wish to remove from:  " + dealership.getName());
         String vehicleVin = promptUser("VIN: ");
         int parsedVehicleVin = Integer.parseInt(vehicleVin);
 
