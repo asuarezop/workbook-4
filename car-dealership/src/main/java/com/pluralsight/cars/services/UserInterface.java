@@ -1,7 +1,9 @@
 package com.pluralsight.cars.services;
 
+import JavaHelpers.ColorCodes;
 import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -22,7 +24,7 @@ public class UserInterface {
     static boolean exitApp = false;
 
     //init(): This method gets called first before any other methods are run inside main()
-    private void init(){
+    private void init() {
         //To get a new dealership object and have object initialized with returned dealership
         this.dealership = DealershipFileManager.getDealership();
     }
@@ -93,14 +95,13 @@ public class UserInterface {
 
     //Other non-static methods to process user requests
     public void processGetByPriceRequest() {
-        System.out.println("Enter your desired price range to search vehicles from dealership: " + dealership.getName());
-        System.out.print("Minimum value: ");
-        userInput = inputSc.nextLine().trim();
-        double minPrice = Double.parseDouble(userInput);
+        promptInstructions("Enter your desired price range to search vehicles from:  " + dealership.getName());
 
-        System.out.print("Maximum value: ");
-        userInput = inputSc.nextLine().trim();
-        double maxPrice = Double.parseDouble(userInput);
+        String min = promptUser("Minimum value: ");
+        double minPrice = Double.parseDouble(min);
+
+        String max = promptUser("Maximum value: ");
+        double maxPrice = Double.parseDouble(max);
 
         if (minPrice != 0 && maxPrice != 0) {
             dealership.getVehiclesByPrice(minPrice, maxPrice);
@@ -108,12 +109,9 @@ public class UserInterface {
     }
 
     public void processGetByMakeModelRequest() {
-        System.out.println("Enter vehicle make and model to search vehicles from dealership: " + dealership.getName());
-        System.out.print("Make: ");
-        String vehicleMake = inputSc.nextLine().trim();
-
-        System.out.print("Model: ");
-        String vehicleModel = inputSc.nextLine().trim();
+        promptInstructions("Enter vehicle make and model to search vehicles from:  " + dealership.getName());
+        String vehicleMake = promptUser("Make: ");
+        String vehicleModel = promptUser("Model: ");
 
         if (!vehicleMake.isEmpty() && !vehicleModel.isEmpty()) {
             dealership.getVehiclesByMakeModel(vehicleMake, vehicleModel);
@@ -121,9 +119,8 @@ public class UserInterface {
     }
 
     public void processGetByYearRequest() {
-        System.out.println("Enter vehicle year to search vehicles from dealership: " + dealership.getName());
-        System.out.print("Year: ");
-        String vehicleYear = inputSc.nextLine().trim();
+        promptInstructions("Enter vehicle year to search vehicles from:  " + dealership.getName());
+        String vehicleYear = promptUser("Year: ");
         int year = Integer.parseInt(vehicleYear);
 
         String parsedYear = String.valueOf(year);
@@ -137,9 +134,8 @@ public class UserInterface {
     }
 
     public void processGetByColorRequest() {
-        System.out.println("Enter vehicle color to search vehicles from dealership: " + dealership.getName());
-        System.out.print("Color: ");
-        String vehicleColor = inputSc.nextLine().trim();
+        promptInstructions("Enter vehicle color to search vehicles from:  " + dealership.getName());
+        String vehicleColor = promptUser("Color: ");
 
         if (!vehicleColor.isEmpty()) {
             dealership.getVehiclesByColor(vehicleColor);
@@ -147,20 +143,18 @@ public class UserInterface {
     }
 
     public void processGetByMileageRequest() {
-        System.out.println("Enter your desired mileage range to search vehicles from dealership: " + dealership.getName());
-        System.out.print("Mileage: ");
-        String vehicleOdometer = inputSc.nextLine().trim();
+        promptInstructions("Enter your desired mileage range to search vehicles from:  " + dealership.getName());
+        String vehicleOdometer = promptUser("Mileage: ");
         int parsedVehicleOdometer = Integer.parseInt(vehicleOdometer);
 
         if (parsedVehicleOdometer != 0) {
-         dealership.getVehiclesByMileage(parsedVehicleOdometer);
+            dealership.getVehiclesByMileage(parsedVehicleOdometer);
         }
     }
 
     public void processGetByVehicleTypeRequest() {
-        System.out.println("Enter vehicle type to search vehicles from dealership: " + dealership.getName());
-        System.out.print("Type: ");
-        String vehicleType = inputSc.nextLine().trim();
+        promptInstructions("Enter vehicle type to search vehicles from:  " + dealership.getName());
+        String vehicleType = promptUser("Type: ");
 
         if (!vehicleType.isEmpty()) {
             dealership.getVehiclesByVehicleType(vehicleType);
@@ -168,39 +162,29 @@ public class UserInterface {
     }
 
     public void processGetAllVehiclesRequest() {
-        System.out.println("Inventory for dealership: " + dealership.getName());
+        promptInstructions("Inventory for:  " + dealership.getName());
         dealership.getAllVehicles();
     }
 
     public void processAddVehicleRequest() throws IOException {
         Vehicle v;
-        System.out.println("Enter new vehicle to add onto dealership: " + dealership.getName());
-        System.out.print("VIN: ");
-        String usedVehicleVIN = inputSc.nextLine().trim();
+        promptInstructions("Enter new vehicle to add into:  " + dealership.getName());
+
+        String usedVehicleVIN = promptUser("VIN: ");
         int parsedUsedVehicleVIN = Integer.parseInt(usedVehicleVIN);
 
-        System.out.print("Year: ");
-        String usedVehicleYear = inputSc.nextLine().trim();
+        String usedVehicleYear = promptUser("Year: ");
         int parsedUsedVehicleYear = Integer.parseInt(usedVehicleYear);
 
-        System.out.print("Make: ");
-        String usedVehicleMake = inputSc.nextLine().trim();
+        String usedVehicleMake = promptUser("Make: ");
+        String usedVehicleModel = promptUser("Model: ");
+        String usedVehicleType = promptUser("Type: ");
+        String usedVehicleColor = promptUser("Color: ");
 
-        System.out.print("Model: ");
-        String usedVehicleModel = inputSc.nextLine().trim();
-
-        System.out.print("Type: ");
-        String usedVehicleType = inputSc.nextLine().trim();
-
-        System.out.print("Color: ");
-        String usedVehicleColor = inputSc.nextLine().trim();
-
-        System.out.print("Mileage: ");
-        String usedVehicleMileage = inputSc.nextLine().trim();
+        String usedVehicleMileage = promptUser("Mileage: ");
         int parsedUsedVehicleMileage = Integer.parseInt(usedVehicleMileage);
 
-        System.out.print("Price: ");
-        String usedVehiclePrice = inputSc.nextLine().trim();
+        String usedVehiclePrice = promptUser("Price: ");
         double parsedUsedVehiclePrice = Double.parseDouble(usedVehiclePrice);
 
         v = new Vehicle(parsedUsedVehicleVIN, parsedUsedVehicleYear, usedVehicleMake, usedVehicleModel, usedVehicleType, usedVehicleColor, parsedUsedVehicleMileage, parsedUsedVehiclePrice);
@@ -211,14 +195,24 @@ public class UserInterface {
 
     public void processRemoveVehicleRequest() throws IOException {
         Vehicle v;
-        System.out.println("Enter desired vehicle you wish to remove from dealership: " + dealership.getName());
-        System.out.print("VIN: ");
-        String vehicleVin = inputSc.nextLine().trim();
+        promptInstructions("Enter desired vehicle you wish to remove from:  " + dealership.getName() + "inventory");
+        String vehicleVin = promptUser("VIN: ");
         int parsedVehicleVin = Integer.parseInt(vehicleVin);
 
         v = new Vehicle(parsedVehicleVin);
 
         dealership.removeVehicle(v);
         DealershipFileManager.saveDealership(dealership);
+    }
+
+    //Retrieves user input from a prompt
+    public String promptUser(String prompt) {
+        System.out.print(ColorCodes.WHITE + prompt + ColorCodes.RESET);
+        return userInput = inputSc.nextLine().trim();
+    }
+
+    public void promptInstructions(String prompt) {
+        String[] textDetails = prompt.split(": ");
+        System.out.println(ColorCodes.LIGHT_BLUE + textDetails[0] + ColorCodes.ORANGE_BOLD + ColorCodes.ITALIC + textDetails[1] + ColorCodes.RESET);
     }
 }

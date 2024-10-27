@@ -2,9 +2,9 @@ package com.pluralsight.cars.models;
 import java.util.ArrayList;
 
 public class Dealership {
-    private String name;
-    private String address;
-    private String phone;
+    private final String name;
+    private final String address;
+    private final String phone;
     private ArrayList<Vehicle> inventory = new ArrayList<>();
 
     //Constructor to create a new Dealership object
@@ -19,24 +19,12 @@ public class Dealership {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getPhone() {
         return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public ArrayList<Vehicle> getInventory() {

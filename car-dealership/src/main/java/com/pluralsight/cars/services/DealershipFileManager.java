@@ -31,7 +31,7 @@ public class DealershipFileManager {
             while ((fileContents = bufReader.readLine()) != null) {
                 String[] dealershipData = fileContents.split("\\|");
 
-                if(fileContents.startsWith("D")) {
+                if (fileContents.startsWith("D")) {
                     //Constructing a new Dealership object and passing in header data from inventory.csv
                     d = new Dealership(dealershipData[0], dealershipData[1], dealershipData[2]);
                     continue;
