@@ -73,7 +73,6 @@ public class Dealership {
 
     //Bugged at the moment when adding else with error message
     public void getVehiclesByColor(String color) {
-        System.out.println("Dealership: " + name);
         printDealershipHeader();
 
         for (Vehicle v: inventory) {
@@ -106,7 +105,6 @@ public class Dealership {
         for (Vehicle v: inventory) {
             System.out.println(v);
         }
-//        formattedOutput();
     }
 
     public void addVehicle(Vehicle v) {
@@ -121,41 +119,6 @@ public class Dealership {
         //Confirmation message
         System.out.println(ColorCodes.SUCCESS + ColorCodes.ITALIC + "Vehicle removed from dealership." + ColorCodes.RESET);
     }
-
-//    public String formattedOutput() {
-//        StringBuilder sb = new StringBuilder();
-//
-//        for (Vehicle v: inventory) {
-//            String vin = String.format(ColorCodes.PINK + "%-10s", v.getVin() + ColorCodes.RESET);
-//            String year = String.format("%-10s", v.getYear() + ColorCodes.RESET);
-//            String make = String.format("%-10s", v.getMake() + ColorCodes.RESET);
-//            String model = String.format("%-15s", v.getModel() + ColorCodes.RESET);
-//            String type = String.format("%-12s", v.getVehicleType() + ColorCodes.RESET);
-//            String color = String.format("%-10s", v.getColor() + ColorCodes.RESET);
-//            String odometer = String.format("%-12s", v.getOdometer() + ColorCodes.RESET);
-//            String price = String.format("%-12s", v.getPrice() + ColorCodes.RESET);
-//
-//            if (inventory.get(0) == v) {
-//                sb.append("┏━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┓\n");
-//                sb.append("┃  VIN  ┃  YEAR  ┃  MAKE  ┃  MODEL  ┃  TYPE  ┃  COLOR  ┃  MILEAGE  ┃  PRICE  ┃\n");
-//                sb.append("┣━━━━━━━┻━━━━━━━━┻━━━━━━━━┻━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━┫\n");
-//                sb.append("┃").append(vin).append(year).append(make).append(model).append(type).append(color).append(odometer).append(price).append(ColorCodes.RESET).append("┃\n");
-//            } else if (inventory.get(inventory.size() - 1) == v) {
-//                sb.append("┃").append(vin).append(year).append(make).append(model).append(type).append(color).append(odometer).append(price).append(ColorCodes.RESET).append("┃\n");
-//                sb.append("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-//
-//                return sb.toString();
-//            } else if (inventory.size() == 1) {
-//                sb.append("┏━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┓\n");
-//                sb.append("┃  VIN  ┃  YEAR  ┃  MAKE  ┃  MODEL  ┃  TYPE  ┃  COLOR  ┃  MILEAGE  ┃  PRICE  ┃\n");
-//                sb.append("┣━━━━━━━┻━━━━━━━━┻━━━━━━━━┻━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━┫\n");
-//                sb.append("┃").append(vin).append(year).append(make).append(model).append(type).append(color).append(odometer).append(price).append(ColorCodes.RESET).append("┃\n");
-//                sb.append("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
-//            }
-//        }
-//
-//        return sb.toString();
-//    }
 
     public void printDealershipHeader() {
         String dealershipHeader = ColorCodes.LIGHT_BLUE_UNDERLINED + String.format("%-10s %-8s %-15s %-13s %-17s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price") + ColorCodes.RESET;
