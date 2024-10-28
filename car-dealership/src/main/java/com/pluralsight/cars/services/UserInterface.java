@@ -5,6 +5,7 @@ import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -22,6 +23,11 @@ public class UserInterface {
 
     //Boolean condition to exit application screens
     static boolean exitApp = false;
+
+    public static void printDealershipHeader() {
+        String dealershipHeader = ColorCodes.LIGHT_BLUE_UNDERLINED + String.format("%-10s %-8s %-15s %-13s %-17s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price") + ColorCodes.RESET;
+        System.out.println(dealershipHeader);
+    }
 
     //init(): This method gets called first before any other methods are run inside main()
     private void init() {
@@ -103,9 +109,8 @@ public class UserInterface {
         String max = promptUser("Maximum value: ");
         double maxPrice = Double.parseDouble(max);
 
-        if (minPrice != 0 && maxPrice != 0) {
-            dealership.getVehiclesByPrice(minPrice, maxPrice);
-        }
+        List<Vehicle> vehicles = dealership.getVehiclesByPrice(minPrice, maxPrice);
+        printVehicleList(vehicles);
     }
 
     public void processGetByMakeModelRequest() {
@@ -115,6 +120,8 @@ public class UserInterface {
 
         if (!vehicleMake.isEmpty() && !vehicleModel.isEmpty()) {
             dealership.getVehiclesByMakeModel(vehicleMake, vehicleModel);
+        } else {
+            System.out.println("Invalid make/model for vehicle. Please try again.");
         }
     }
 
@@ -139,16 +146,23 @@ public class UserInterface {
 
         if (!vehicleColor.isEmpty()) {
             dealership.getVehiclesByColor(vehicleColor);
+        } else {
+            System.out.println("Invalid color. Please try again.");
         }
     }
 
     public void processGetByMileageRequest() {
         promptInstructions("Enter your desired mileage range to search vehicles from:  " + dealership.getName());
-        String vehicleOdometer = promptUser("Mileage: ");
-        int parsedVehicleOdometer = Integer.parseInt(vehicleOdometer);
+        String min = promptUser("Minimum mileage: ");
+        int minMileage = Integer.parseInt(min);
 
-        if (parsedVehicleOdometer != 0) {
-            dealership.getVehiclesByMileage(parsedVehicleOdometer);
+        String max = promptUser("Maximum mileage: ");
+        int maxMileage = Integer.parseInt(max);
+
+        if (minMileage != 0 && maxMileage != 0) {
+            dealership.getVehiclesByMileage(minMileage, maxMileage);
+        } else {
+            System.out.println("Invalid mileage. Please try again.");
         }
     }
 
@@ -156,8 +170,11 @@ public class UserInterface {
         promptInstructions("Enter vehicle type to search vehicles from:  " + dealership.getName());
         String vehicleType = promptUser("Type: ");
 
-        if (!vehicleType.isEmpty()) {
+        if (!vehicleType.isEmpty()){
             dealership.getVehiclesByVehicleType(vehicleType);
+        }
+        else {
+            System.out.println("Invalid vehicle type. Please try again.");
         }
     }
 
@@ -214,5 +231,17 @@ public class UserInterface {
     public void promptInstructions(String prompt) {
         String[] textDetails = prompt.split(": ");
         System.out.println(ColorCodes.LIGHT_BLUE + textDetails[0] + ColorCodes.ORANGE_BOLD + ColorCodes.ITALIC + textDetails[1] + ColorCodes.RESET);
+    }
+
+    private static void printVehicleList (List<Vehicle> vehicles) {
+        if(!vehicles.isEmpty()){
+            printDealershipHeader();
+            for (Vehicle v: vehicles){
+                System.out.println(v);
+            }
+        }
+        else {
+            System.out.println("No vehicles matched your input.");
+        }
     }
 }

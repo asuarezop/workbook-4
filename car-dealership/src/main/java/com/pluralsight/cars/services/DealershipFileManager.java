@@ -18,7 +18,7 @@ public class DealershipFileManager {
 
     //Retrieving a Dealership object, load and read from inventory.csv
     public static Dealership getDealership() {
-        Dealership d = null;
+        Dealership d = new Dealership();
         Vehicle v;
 
         try {
