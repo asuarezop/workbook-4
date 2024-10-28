@@ -55,6 +55,7 @@ public class DealershipFileManager {
 
                 //Adding each vehicle to inventory ArrayList
                 d.getInventory().add(v);
+//                d.getInventory().sort((v1, v2) -> v2.getVin().compareTo));
             }
             bufReader.close();
 
@@ -71,14 +72,12 @@ public class DealershipFileManager {
             BufferedWriter bufWriter = getBufferedWriter(UserInterface.inventoryCSV);
 
             //Writing dealership header to csv file
-            bufWriter.write(d.getName() + "|" + d.getAddress() + "|" + d.getPhone() + "\n");
+            bufWriter.write(String.format("%s|%s|%s", d.getName(), d.getAddress(), d.getPhone()));
 
             //Writing all vehicles from dealership inventory to csv file
             for (Vehicle v: d.getInventory()) {
-                bufWriter.write(v.getVin() + "|" + v.getYear() + "|" + v.getMake() + "|" + v.getModel() + "|" + v.getVehicleType() + "|" + v.getColor() + "|" + v.getOdometer() + "|");
-                bufWriter.write(String.format("%.2f \n", v.getPrice()));
+                bufWriter.write(String.format("%s|%s|%s|%s|%s|%s|%s|%s|%.2f\n", v.getVin(), v.getYear(), v.getMake(), v.getModel(), v.getModel(), v.getVehicleType(), v.getColor(), v.getPrice()));
             }
-
             bufWriter.close();
         } catch (IOException e) {
             throw new IOException(e);

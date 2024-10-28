@@ -1,6 +1,5 @@
 package com.pluralsight.cars.models;
 import JavaHelpers.ColorCodes;
-import com.pluralsight.cars.services.UserInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,72 +48,62 @@ public class Dealership {
         return results;
     }
 
-    public void getVehiclesByMakeModel(String make, String model) {
-
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        ArrayList<Vehicle> results = new ArrayList<>();
         for (Vehicle v: inventory) {
             if (v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)) {
-                System.out.println(v);
-            } else {
-                System.out.println("No vehicles matched your provided make/model.");
+                results.add(v);
             }
-            break;
         }
+        return results;
     }
 
-    public void getVehiclesByYear(int year) {
-        UserInterface.printDealershipHeader();
+    public List<Vehicle> getVehiclesByYear(int year) {
+        ArrayList<Vehicle> results = new ArrayList<>();
         for (Vehicle v: inventory) {
             if (v.getYear() == year) {
-                System.out.println(v);
-            } else {
-                System.out.println("No vehicles matched given year.");
+                results.add(v);
             }
-            break;
         }
+        return results;
     }
 
-    //Bugged at the moment when adding else with error message
-    public void getVehiclesByColor(String color) {
-        UserInterface.printDealershipHeader();
+    public List<Vehicle> getVehiclesByColor(String color) {
+        ArrayList<Vehicle> results = new ArrayList<>();
         for (Vehicle v: inventory) {
            if (v.getColor().equalsIgnoreCase(color)) {
-               System.out.println(v);
+               results.add(v);
            }
         }
-        System.out.println("No vehicles found that match given color.");
+        return results;
     }
 
-    public void getVehiclesByMileage(int min, int max) {
-        UserInterface.printDealershipHeader();
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+       ArrayList<Vehicle> results = new ArrayList<>();
         for (Vehicle v: inventory) {
             if (v.getOdometer() >= min && v.getOdometer() <= max) {
-                System.out.println(v);
+                results.add(v);
             }
-
-//            if (inventory.stream().filter(c -> c.getOdometer() >= min && c.getOdometer() <= max))
-//            else if (min < v.getOdometer() || max < v.getOdometer()) {
-//                break;
-//            }
-
         }
-
-        System.out.println("No vehicles found that match provided mileage range.");
+        return results;
     }
 
-    public void getVehiclesByVehicleType(String vehicleType) {
-        UserInterface.printDealershipHeader();
+    public List<Vehicle> getVehiclesByVehicleType(String vehicleType) {
+        ArrayList<Vehicle> results = new ArrayList<>();
         for (Vehicle v: inventory) {
             if (v.getVehicleType().equalsIgnoreCase(vehicleType)) {
-                System.out.println(v);
+                results.add(v);
             }
         }
+        return results;
     }
 
-    public void getAllVehicles() {
-        UserInterface.printDealershipHeader();
+    public List<Vehicle> getAllVehicles() {
+        ArrayList<Vehicle> results = new ArrayList<>();
         for (Vehicle v: inventory) {
-            System.out.println(v);
+            results.add(v);
         }
+        return results;
     }
 
     public void addVehicle(Vehicle v) {

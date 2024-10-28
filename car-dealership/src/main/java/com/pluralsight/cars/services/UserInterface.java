@@ -5,6 +5,7 @@ import com.pluralsight.cars.models.Dealership;
 import com.pluralsight.cars.models.Vehicle;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,11 +24,6 @@ public class UserInterface {
 
     //Boolean condition to exit application screens
     static boolean exitApp = false;
-
-    public static void printDealershipHeader() {
-        String dealershipHeader = ColorCodes.LIGHT_BLUE_UNDERLINED + String.format("%-10s %-8s %-15s %-13s %-17s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price") + ColorCodes.RESET;
-        System.out.println(dealershipHeader);
-    }
 
     //init(): This method gets called first before any other methods are run inside main()
     private void init() {
@@ -119,9 +115,10 @@ public class UserInterface {
         String vehicleModel = promptUser("Model: ");
 
         if (!vehicleMake.isEmpty() && !vehicleModel.isEmpty()) {
-            dealership.getVehiclesByMakeModel(vehicleMake, vehicleModel);
+            List<Vehicle> vehicles = dealership.getVehiclesByMakeModel(vehicleMake, vehicleModel);
+            printVehicleList(vehicles);
         } else {
-            System.out.println("Invalid make/model for vehicle. Please try again.");
+            System.out.println("No vehicles matched your provided make/model. Please try again.");
         }
     }
 
@@ -134,9 +131,10 @@ public class UserInterface {
 
         //Checking length of String parsedYear is not greater than 4
         if (year != 0 && parsedYear.length() == 4) {
-            dealership.getVehiclesByYear(year);
+            List<Vehicle> vehicles = dealership.getVehiclesByYear(year);
+            printVehicleList(vehicles);
         } else {
-            System.out.println("Invalid year. Please try again.");
+            System.out.println("No vehicles matched given year. Please try again.");
         }
     }
 
@@ -145,9 +143,10 @@ public class UserInterface {
         String vehicleColor = promptUser("Color: ");
 
         if (!vehicleColor.isEmpty()) {
-            dealership.getVehiclesByColor(vehicleColor);
+            List<Vehicle> vehicles = dealership.getVehiclesByColor(vehicleColor);
+            printVehicleList(vehicles);
         } else {
-            System.out.println("Invalid color. Please try again.");
+            System.out.println("No vehicles found that match given color. Please try again.");
         }
     }
 
@@ -160,9 +159,10 @@ public class UserInterface {
         int maxMileage = Integer.parseInt(max);
 
         if (minMileage != 0 && maxMileage != 0) {
-            dealership.getVehiclesByMileage(minMileage, maxMileage);
+           List<Vehicle> vehicles = dealership.getVehiclesByMileage(minMileage, maxMileage);
+           printVehicleList(vehicles);
         } else {
-            System.out.println("Invalid mileage. Please try again.");
+            System.out.println("No vehicles found that match provided mileage range. Please try again.");
         }
     }
 
@@ -171,7 +171,8 @@ public class UserInterface {
         String vehicleType = promptUser("Type: ");
 
         if (!vehicleType.isEmpty()){
-            dealership.getVehiclesByVehicleType(vehicleType);
+           List<Vehicle> vehicles = dealership.getVehiclesByVehicleType(vehicleType);
+           printVehicleList(vehicles);
         }
         else {
             System.out.println("Invalid vehicle type. Please try again.");
@@ -180,7 +181,9 @@ public class UserInterface {
 
     public void processGetAllVehiclesRequest() {
         promptInstructions("Inventory for:  " + dealership.getName());
-        dealership.getAllVehicles();
+
+        List<Vehicle> vehicles = dealership.getAllVehicles();
+        printVehicleList(vehicles);
     }
 
     public void processAddVehicleRequest() throws IOException {
@@ -231,6 +234,11 @@ public class UserInterface {
     public void promptInstructions(String prompt) {
         String[] textDetails = prompt.split(": ");
         System.out.println(ColorCodes.LIGHT_BLUE + textDetails[0] + ColorCodes.ORANGE_BOLD + ColorCodes.ITALIC + textDetails[1] + ColorCodes.RESET);
+    }
+
+    public static void printDealershipHeader() {
+        String dealershipHeader = ColorCodes.LIGHT_BLUE_UNDERLINED + String.format("%-10s %-8s %-15s %-13s %-17s %-10s %-12s %-12s", "VIN", "Year", "Make", "Model", "Type", "Color", "Odometer", "Price") + ColorCodes.RESET;
+        System.out.println(dealershipHeader);
     }
 
     private static void printVehicleList (List<Vehicle> vehicles) {
