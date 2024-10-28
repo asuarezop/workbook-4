@@ -1,14 +1,13 @@
 package com.pluralsight.cars.models;
 import JavaHelpers.ColorCodes;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Dealership {
     private final String name;
     private final String address;
     private final String phone;
-    private ArrayList<Vehicle> inventory = new ArrayList<>();
+    private final ArrayList<Vehicle> inventory = new ArrayList<>();
 
     //Constructor to create a new Dealership object
     public Dealership(String name, String address, String phone) {
@@ -32,10 +31,6 @@ public class Dealership {
 
     public ArrayList<Vehicle> getInventory() {
         return inventory;
-    }
-
-    public void setInventory(ArrayList<Vehicle> inventory) {
-        this.inventory = inventory;
     }
 
     //Non-static methods for Dealership processing requests

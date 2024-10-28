@@ -43,7 +43,7 @@ public class UserInterface {
                 [3] Year - filter vehicles by year range
                 [4] Color - filter vehicles by color
                 [5] Mileage - filter vehicles by mileage range
-                [6] Vehicle Type - filter vehicles by type (SUV, Sedan, Hatchback, etc.) 
+                [6] Vehicle Type - filter vehicles by type (SUV, Sedan, Hatchback, etc.)
                 [7] All Vehicles - display every vehicle from inventory
                 [8] Add Vehicle - adds a new vehicle to inventory
                 [9] Remove Vehicle - removes a vehicle from inventory
