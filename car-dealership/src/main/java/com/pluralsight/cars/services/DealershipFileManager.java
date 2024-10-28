@@ -33,7 +33,10 @@ public class DealershipFileManager {
 
                 if (fileContents.startsWith("D")) {
                     //Constructing a new Dealership object and passing in header data from inventory.csv
-                    d = new Dealership(dealershipData[0], dealershipData[1], dealershipData[2]);
+                    String dealershipName = dealershipData[0];
+                    String dealershipAddress = dealershipData[1];
+                    String dealershipPhoneNum = dealershipData[2];
+                    d = new Dealership(dealershipName, dealershipAddress, dealershipPhoneNum);
                     continue;
                 }
 
